@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+release/
+
+# Backups
+backups/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude
+.claude/
+memory/
+CLAUDE.md
+
+# Local dev tools
+backup.sh
+
+# Legacy distribution
+waldohunt.zip
+
+# Logs
+*.log
