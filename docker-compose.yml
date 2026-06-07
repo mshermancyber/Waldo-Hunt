@@ -1,0 +1,33 @@
+services:
+  waldohunt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: waldohunt
+    restart: unless-stopped
+    ports:
+      - "${HOST_HTTP_PORT:-8080}:80"
+      - "${HOST_HTTPS_PORT:-8443}:443"
+    volumes:
+      - nginx_logs:/var/log/nginx
+    environment:
+      - TZ=America/New_York
+    networks:
+      - waldohunt_net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.waldohunt.description=Insider Threat SPL Generator (React)"
+      - "com.waldohunt.version=2.0.0"
+
+networks:
+  waldohunt_net:
+    driver: bridge
+
+volumes:
+  nginx_logs:
+    driver: local
